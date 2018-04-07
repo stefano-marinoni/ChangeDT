@@ -19,10 +19,6 @@ namespace ChangeDT
         // Install-Package CommandLineParser
         private static void Main(string[] args)
         {
-            //Parser.Default.ParseArguments<Options>(args)
-            //    .WithParsed(RunOptionsAndReturnExitCode)
-            //    .WithNotParsed(HandleParseError);
-
             var errors = new List<CommandLine.Error>();
 
             Parser.Default.ParseArguments<ParsedOptions>(args)
@@ -36,46 +32,9 @@ namespace ChangeDT
                 return;
             }
 
-            //string dir = @"C:\TMP";
             string dir = _options.Path;
-            //var dtime = new DateTime(2000, 1, 1);
             var dtime = new DateTime(_options.Year, _options.Month, _options.Day);
-
-            //var folders = Directory.GetDirectories(dir, "*", SearchOption.AllDirectories);
-            //foreach (var item in folders)
-            //{
-            //    try
-            //    {
-            //        Console.WriteLine(item);
-            //        Directory.SetCreationTimeUtc(item, dtime);
-            //        Directory.SetLastAccessTimeUtc(item, dtime);
-            //        Directory.SetLastWriteTimeUtc(item, dtime);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Console.WriteLine("Exception in " + MethodBase.GetCurrentMethod().Name + " - " + ex);
-            //    }
-            //}
-
-            //var files = Directory.GetFiles(dir, "*.*", SearchOption.AllDirectories);
-            //foreach (var item in files)
-            //{
-            //    try
-            //    {
-            //        var info = new FileInfo(item);
-            //        Console.WriteLine(info.Name + " - " + info.Length);
-
-            //        Console.WriteLine(item);
-            //        Directory.SetCreationTimeUtc(item, dtime);
-            //        Directory.SetLastAccessTimeUtc(item, dtime);
-            //        Directory.SetLastWriteTimeUtc(item, dtime);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Console.WriteLine("Exception in " + MethodBase.GetCurrentMethod().Name + " - " + ex);
-            //    }
-            //}
-
+            
             var fileSystemEntries = Directory.GetFileSystemEntries(dir, "*.*", SearchOption.AllDirectories);
             foreach (var item in fileSystemEntries)
             {
@@ -110,12 +69,5 @@ namespace ChangeDT
                 Debug.WriteLine(key);
             }
         }
-
-        //static void RunOptionsAndReturnExitCode(ParsedOptions o) => _options = o;
-
-        //static void HandleParseError(IEnumerable<Error> errs)
-        //{
-        //    Console.WriteLine("HandleParseError: " + errs);
-        //}
     }
 }
